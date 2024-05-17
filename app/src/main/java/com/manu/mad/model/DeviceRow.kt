@@ -10,24 +10,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RoomRow(item: RoomRowModel) {
-    var isExpanded by remember {
-        mutableStateOf(false)
-    }
+fun DeviceRow(item: DeviceRowModel) {
     Row(
         modifier = Modifier
             .padding(3.dp)
@@ -35,7 +27,7 @@ fun RoomRow(item: RoomRowModel) {
     ) {
         Image(
             painter = painterResource(id = item.imageId),
-            contentDescription = item.content,
+            contentDescription = item.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .padding(3.dp)
@@ -48,11 +40,7 @@ fun RoomRow(item: RoomRowModel) {
         ) {
             Text(text = item.title, style = TextStyle(fontWeight = FontWeight.Bold))
             Text(
-                modifier = Modifier.clickable {
-                    isExpanded = !isExpanded
-                },
-                maxLines = if (isExpanded) 10 else 1,
-                text = if (!isExpanded) { item.content.substring(0, 29) + "..." } else item.content
+                text = item.voltage.toString() + "кВт/ч"
             )
         }
     }
